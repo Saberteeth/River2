@@ -76,5 +76,4 @@ export class Move extends view.View {
   }
 }
 
-
 export default Move;

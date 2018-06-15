@@ -1,9 +1,11 @@
 # README
+**Version:3.0.2**
+
 ## Install
 ```js
 npm install
 npm run start
-```  
+```
 # [API Click here](https://saberteeth.github.io/River/)  
 
 Control the canvas by typescript. U can use the river create canvas app.
@@ -30,5 +32,5 @@ Control the canvas by typescript. U can use the river create canvas app.
 				this.addchild(this.btn);
 			}
 		}
-River has not only these. Such as ScrollView, Container, animations and Layout u can use. U can use them create a fictitious mobile, even a simple game. 
+River has not only these. Such as ScrollView, Container, animations and Layout u can use. U can use them create a fictitious mobile, even a simple game.
 ![](https://github.com/Saberteeth/River/blob/master/demo.png?raw=true)
