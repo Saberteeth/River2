@@ -1,5 +1,5 @@
 import iLayout from './iLayout';
-import View from '../class/View';
+import View from '../class/view/View';
 
 export default interface iContainer {
   height: number;

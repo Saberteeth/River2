@@ -1,26 +1,19 @@
 import view from '../river/class';
-import widget from '../river/widget/widget';
+
+import { Move, AnimationUtils } from './Move';
+
+
 export class MainActivity extends view.Activity {
-  private btn: widget.Button;
+  private btn: Move;
 
   public onCreate() {
-    let size = 0;
-    this.btn = this.createBtn(() => {
-      this.btn.txt = `${size++ % 10}`
-    });
+    this.btn = new Move();
+    this.btn.left = this.width / 2 - this.btn.width / 2;
+    this.btn.top = this.height / 2 - this.btn.height / 2;
     this.addChild(this.btn);
+    AnimationUtils.ALPHA.play(0, 0.5, 1000, this.btn);
   }
 
-  private createBtn(action: () => void, width: number = 100, height: number = 50, txt: string = '0-9', bg: string = "btn.png", bgPress: string = "btn_press.png"): widget.Button {
-    const btn = new widget.Button();
-    btn.txt = txt;
-    btn.width = width;
-    btn.height = height;
-    btn._btn_bg.src = bg;
-    btn._btn_bg_press.src = bgPress;
-    btn.addClickEvent(action);
-    return btn;
-  }
 }
 
 export function createActivity(id: string) {

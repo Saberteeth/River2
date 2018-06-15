@@ -1,32 +1,33 @@
-import iContainer from '../interface/iContainer';
-import View from '../class/View';
-import iLayout from '../interface/iLayout';
-import ViewType from '../enum/ViewType';
-import Container from '../class/Container';
-import TouchEvent from '../interface/TouchEvent';
+import * as iFace from '../../interface';
+
+import ViewType from '../../enum/ViewType';
+
+import View from './View';
+import Container from './Container';
+
 
 /**
    * 核心界面控制器，类似于Android中的Activity对象，拥有对添加其中的View对象的控制作用，
    * 并实际控制核心显示canvas的绘制，以及touch等事件分发。
    */
-export default class Activity implements iContainer {
+export default class Activity implements iFace.iContainer {
   private _children: Array<View>;
   private _activityView: View | null;
   private _lastFloatView: View | null;
   private _canvas: HTMLCanvasElement;
   private _ctx: CanvasRenderingContext2D | null;
   private _timers: Array<(dt: number) => void>;
-  private _layout: iLayout;
+  private _layout: iFace.iLayout;
 
   get children(): Array<View> {
     return this._children;
   }
 
-  set layout(l: iLayout) {
+  set layout(l: iFace.iLayout) {
     this._layout = l;
   }
 
-  get layout(): iLayout {
+  get layout(): iFace.iLayout {
     return this._layout;
   }
 
@@ -217,7 +218,7 @@ export default class Activity implements iContainer {
       }
     })
 
-    window.addEventListener(View.MOUSE_DOWN, (e: TouchEvent) => {
+    window.addEventListener(View.MOUSE_DOWN, (e: iFace.TouchEvent) => {
       e.offX = e.offsetX;
       e.offY = e.offsetY;
 
@@ -258,7 +259,7 @@ export default class Activity implements iContainer {
         }
     });
 
-    window.addEventListener(View.TOUCH_DOWN, (e: TouchEvent) => {
+    window.addEventListener(View.TOUCH_DOWN, (e: iFace.TouchEvent) => {
 
       e.clientX = e.changedTouches[0].clientX + document.body.scrollLeft;
       e.clientY = e.changedTouches[0].clientY + document.body.scrollTop;
@@ -306,7 +307,7 @@ export default class Activity implements iContainer {
       }
     })
 
-    window.addEventListener(View.MOUSE_MOVE, (e: TouchEvent) => {
+    window.addEventListener(View.MOUSE_MOVE, (e: iFace.TouchEvent) => {
       e.offX = e.offsetX;
       e.offY = e.offsetY;
       switch (e.type) {
@@ -363,7 +364,7 @@ export default class Activity implements iContainer {
       }
     });
 
-    window.addEventListener(View.TOUCH_MOVE, (e: TouchEvent) => {
+    window.addEventListener(View.TOUCH_MOVE, (e: iFace.TouchEvent) => {
       e.clientX = e.changedTouches[0].clientX + document.body.scrollLeft;;
       e.clientY = e.changedTouches[0].clientY + document.body.scrollTop;;
       e.offX = e.clientX - this.canvas.offsetLeft;
@@ -397,7 +398,7 @@ export default class Activity implements iContainer {
 
     })
 
-    window.addEventListener(View.MOUSE_UP, (e: TouchEvent) => {
+    window.addEventListener(View.MOUSE_UP, (e: iFace.TouchEvent) => {
       e.offX = e.offsetX;
       e.offY = e.offsetY;
       switch (e.type) {
@@ -429,7 +430,7 @@ export default class Activity implements iContainer {
       }
     });
 
-    window.addEventListener(View.TOUCH_UP, (e: TouchEvent) => {
+    window.addEventListener(View.TOUCH_UP, (e: iFace.TouchEvent) => {
       e.clientX = e.changedTouches[0].clientX + document.body.scrollLeft;
       e.clientY = e.changedTouches[0].clientY + document.body.scrollTop;
       e.offX = e.clientX - this.canvas.offsetLeft;

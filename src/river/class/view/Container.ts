@@ -1,14 +1,12 @@
-import View from '../class/View';
-import iContainer from '../interface/iContainer';
-import iLayout from '../interface/iLayout';
-import ViewType from '../enum/ViewType';
-import TouchEvent from '../interface/TouchEvent';
+import View from './View';
+import ViewType from '../../enum/ViewType';
+import * as iFace from '../../interface';
 
-export default class Container extends View implements iContainer {
+export default class Container extends View implements iFace.iContainer {
   private _children: Array<View>;
   private _actionChild: View | null;
 
-  private _layout: iLayout;
+  private _layout: iFace.iLayout;
 
   removeChildrenByClass(clazzs: Array<Function>) {
     A: for (var x = 0; x < this._children.length; x++) {
@@ -21,11 +19,11 @@ export default class Container extends View implements iContainer {
       }
     }
   }
-  set layout(l: iLayout) {
+  set layout(l: iFace.iLayout) {
     this._layout = l;
   }
 
-  get layout(): iLayout {
+  get layout(): iFace.iLayout {
     return this._layout;
   }
 
@@ -68,7 +66,6 @@ export default class Container extends View implements iContainer {
     }
     return false;
   }
-
 
   getViewByID(id: string): View | null {
     for (var i = 0; i < this._children.length; i++) {
@@ -172,7 +169,7 @@ export default class Container extends View implements iContainer {
   /**
    * 事件分发,不建议调用
    */
-  issue(e: TouchEvent): boolean {
+  issue(e: iFace.TouchEvent): boolean {
     e.offX -= this.left;
     e.offY -= this.top;
 

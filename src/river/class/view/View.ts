@@ -1,7 +1,9 @@
-import ViewType from '../enum/ViewType';
-import Container from './Container';
-import TouchEvent from '../interface/TouchEvent';
-import Activity from '../class/Activity';
+import ViewType from '../../enum/ViewType';
+import Container from '../view/Container';
+import Activity from '../../class/view/Activity';
+
+import * as iFace from '../../interface';
+
 
 /**
      * 显示对象的封装类，同时持有自我绘制能力，如需要自我绘制需为 onDraw: (ctx: CanvasRenderingContext2D) => void;字段赋值
@@ -151,10 +153,10 @@ export default class View {
 
   private _nowType: ViewType;
   private _canvas: HTMLCanvasElement;
-  private _touchListener: (e: TouchEvent) => boolean;
+  private _touchListener: (e: iFace.TouchEvent) => boolean;
   private _parent: Activity | null;
   private _container: Container | null;
-  private _floatMoveListener: (e: TouchEvent) => boolean;
+  private _floatMoveListener: (e: iFace.TouchEvent) => boolean;
   private _mouseWheelListener: (e: MouseWheelEvent) => boolean;
   private _ctx: CanvasRenderingContext2D | null;
 
@@ -264,14 +266,14 @@ export default class View {
   /**
    * 添加鼠标点击与触摸事件
    */
-  addTouchEventListener(listener: (e: TouchEvent) => boolean) {
+  addTouchEventListener(listener: (e: iFace.TouchEvent) => boolean) {
     this._touchListener = listener;
   }
 
   /**
    * 添加鼠标悬浮事件,注float事件中检测对象必须由touchTpye描述事件状态
    */
-  addFloatMoveEvent(listener: (e: TouchEvent) => boolean) {
+  addFloatMoveEvent(listener: (e: iFace.TouchEvent) => boolean) {
     this._floatMoveListener = listener;
   }
 
@@ -285,7 +287,7 @@ export default class View {
   /**
    * 此函数由activity控制操作，请避免使用
    */
-  onTouchEvent(e: TouchEvent): boolean {
+  onTouchEvent(e: iFace.TouchEvent): boolean {
     if (this._touchListener)
       return this._touchListener(e);
     else
@@ -295,7 +297,7 @@ export default class View {
   /**
    * 此函数由activity控制操作，请避免使用
    */
-  onFloatEvent(e: TouchEvent): boolean {
+  onFloatEvent(e: iFace.TouchEvent): boolean {
     if (this._floatMoveListener)
       return this._floatMoveListener(e);
     else
